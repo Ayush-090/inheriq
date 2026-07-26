@@ -1,26 +1,451 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ============================================
+   INHERIQ DESIGN SYSTEM
+   Premium AI Workforce SaaS
+   ============================================ */
+
+@theme {
+  /* Brand Colors */
+  --color-bg-primary: #050816;
+  --color-bg-card: #0E1325;
+  --color-bg-card-hover: #141A30;
+  --color-accent: #5B8CFF;
+  --color-accent-hover: #7BA3FF;
+  --color-secondary: #7B61FF;
+  --color-secondary-hover: #9580FF;
+  --color-success: #00D68F;
+  --color-text-primary: #FFFFFF;
+  --color-text-secondary: #B7C2D0;
+  --color-text-muted: #6B7A8D;
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-border-hover: rgba(255, 255, 255, 0.15);
+  --color-glow-blue: rgba(91, 140, 255, 0.15);
+  --color-glow-purple: rgba(123, 97, 255, 0.15);
+
+  /* Typography */
+  --font-display: 'Manrope', sans-serif;
+  --font-body: 'Inter', sans-serif;
+
+  /* Spacing */
+  --spacing-section: 8rem;
+  --spacing-section-mobile: 4rem;
+
+  /* Animations */
+  --animate-fade-in: fade-in 0.8s ease-out forwards;
+  --animate-slide-up: slide-up 0.8s ease-out forwards;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-glow-pulse: glow-pulse 3s ease-in-out infinite;
+  --animate-gradient-shift: gradient-shift 8s ease infinite;
+  --animate-spin-slow: spin 20s linear infinite;
+  --animate-counter: counter-up 1.5s ease-out forwards;
+  --animate-border-rotate: border-rotate 4s linear infinite;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* ============================================
+   BASE STYLES
+   ============================================ */
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #050816;
+  color: #FFFFFF;
+  font-family: var(--font-body);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #050816;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(91, 140, 255, 0.3);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(91, 140, 255, 0.5);
+}
+
+::selection {
+  background: rgba(91, 140, 255, 0.3);
+  color: #ffffff;
+}
+
+/* ============================================
+   KEYFRAME ANIMATIONS
+   ============================================ */
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes glow-pulse {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(91, 140, 255, 0.15);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(91, 140, 255, 0.3), 0 0 80px rgba(123, 97, 255, 0.1);
+  }
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes border-rotate {
+  from {
+    --border-angle: 0deg;
+  }
+  to {
+    --border-angle: 360deg;
+  }
+}
+
+@keyframes particle-float {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--tx), var(--ty)) scale(0.5);
+    opacity: 0;
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.8);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes notification-pop {
+  0% {
+    transform: scale(0) translateY(10px);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1) translateY(-2px);
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+/* ============================================
+   GLASSMORPHISM
+   ============================================ */
+
+.glass {
+  background: rgba(14, 19, 37, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-strong {
+  background: rgba(14, 19, 37, 0.8);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-card {
+  background: rgba(14, 19, 37, 0.5);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 1.25rem;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+  background: rgba(14, 19, 37, 0.7);
+  border-color: rgba(91, 140, 255, 0.2);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3), 0 0 40px rgba(91, 140, 255, 0.05);
+}
+
+/* ============================================
+   GRADIENT EFFECTS
+   ============================================ */
+
+.gradient-text {
+  background: linear-gradient(135deg, #5B8CFF 0%, #7B61FF 50%, #5B8CFF 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradient-shift 4s ease infinite;
+}
+
+.gradient-bg {
+  background: linear-gradient(135deg, rgba(91, 140, 255, 0.1), rgba(123, 97, 255, 0.1));
+}
+
+.gradient-border {
+  position: relative;
+  background: #0E1325;
+  border-radius: 1.25rem;
+}
+
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(
+    var(--border-angle, 0deg),
+    rgba(91, 140, 255, 0.5),
+    rgba(123, 97, 255, 0.5),
+    rgba(91, 140, 255, 0.1),
+    rgba(123, 97, 255, 0.1)
+  );
+  z-index: -1;
+  animation: border-rotate 4s linear infinite;
+}
+
+/* ============================================
+   BUTTON STYLES
+   ============================================ */
+
+.btn-primary {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 2rem;
+  background: linear-gradient(135deg, #5B8CFF, #7B61FF);
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border-radius: 0.875rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #7BA3FF, #9580FF);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: inherit;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(91, 140, 255, 0.4), 0 0 60px rgba(91, 140, 255, 0.15);
+}
+
+.btn-primary:hover::before {
+  opacity: 1;
+}
+
+.btn-primary span {
+  position: relative;
+  z-index: 1;
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 2rem;
+  background: rgba(255, 255, 255, 0.04);
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border-radius: 0.875rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(91, 140, 255, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+/* ============================================
+   GLOW EFFECTS
+   ============================================ */
+
+.glow-blue {
+  box-shadow: 0 0 20px rgba(91, 140, 255, 0.15), 0 0 60px rgba(91, 140, 255, 0.05);
+}
+
+.glow-purple {
+  box-shadow: 0 0 20px rgba(123, 97, 255, 0.15), 0 0 60px rgba(123, 97, 255, 0.05);
+}
+
+.glow-success {
+  box-shadow: 0 0 20px rgba(0, 214, 143, 0.15), 0 0 60px rgba(0, 214, 143, 0.05);
+}
+
+/* ============================================
+   CURSOR GLOW
+   ============================================ */
+
+.cursor-glow {
+  position: fixed;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(91, 140, 255, 0.06) 0%,
+    rgba(123, 97, 255, 0.03) 30%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 0;
+  transform: translate(-50%, -50%);
+  transition: left 0.3s ease-out, top 0.3s ease-out;
+}
+
+/* ============================================
+   SECTION SPACING
+   ============================================ */
+
+.section-padding {
+  padding: 7rem 0;
+}
+
+@media (max-width: 768px) {
+  .section-padding {
+    padding: 4rem 0;
+  }
+}
+
+/* ============================================
+   ANIMATED ACCORDION
+   ============================================ */
+
+.accordion-content {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.accordion-content.open {
+  grid-template-rows: 1fr;
+}
+
+.accordion-content > div {
+  overflow: hidden;
+}
+
+/* ============================================
+   SHIMMER LOADING
+   ============================================ */
+
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.05) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* ============================================
+   NOTIFICATION ANIMATION
+   ============================================ */
+
+.notification-enter {
+  animation: notification-pop 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* ============================================
+   RESPONSIVE CONTAINER
+   ============================================ */
+
+.container-custom {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+@media (min-width: 1536px) {
+  .container-custom {
+    max-width: 1400px;
+  }
 }
