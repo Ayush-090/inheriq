@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ArrowRight, Sparkles } from 'lucide-react';
 import Link from 'next/link';
 import { NAV_LINKS, SITE_CONFIG } from '@/lib/constants';
+import { getGoogleFormUrl } from '@/lib/site-config';
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -41,12 +42,9 @@ export function Navbar() {
       >
         <div className="container-custom flex items-center justify-between h-[72px]">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2.5 group">
-            <div className="relative w-9 h-9 rounded-xl bg-gradient-to-br from-accent to-secondary flex items-center justify-center shadow-lg shadow-accent/20">
-              <Sparkles className="w-5 h-5 text-white" />
-              <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-accent to-secondary opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500" />
-            </div>
-            <span className="text-xl font-bold tracking-tight font-display">
+          <Link href="/" className="flex items-center gap-2.5 group" aria-label="Inheriq home">
+            <img src="/inheriq-logo.svg" alt="Inheriq logo" className="h-10 w-10 rounded-xl object-cover" />
+            <span className="text-xl font-bold tracking-tight font-display text-white">
               {SITE_CONFIG.name}
             </span>
           </Link>
@@ -66,20 +64,24 @@ export function Navbar() {
 
           {/* Desktop CTAs */}
           <div className="hidden lg:flex items-center gap-3">
-            <Link
-              href="/demo"
+            <a
+              href={getGoogleFormUrl()}
+              target="_blank"
+              rel="noreferrer"
               className="btn-secondary text-sm px-5 py-2.5"
             >
               Book Demo
-            </Link>
-            <Link
-              href="/contact"
+            </a>
+            <a
+              href={getGoogleFormUrl()}
+              target="_blank"
+              rel="noreferrer"
               className="btn-primary text-sm px-5 py-2.5"
             >
               <span className="flex items-center gap-2">
                 Start Free <ArrowRight className="w-4 h-4" />
               </span>
-            </Link>
+            </a>
           </div>
 
           {/* Mobile Toggle */}
@@ -132,22 +134,26 @@ export function Navbar() {
                 transition={{ delay: 0.5 }}
                 className="flex flex-col gap-3 mt-8 w-full max-w-xs"
               >
-                <Link
-                  href="/demo"
+                <a
+                  href={getGoogleFormUrl()}
+                  target="_blank"
+                  rel="noreferrer"
                   onClick={() => setIsMobileOpen(false)}
                   className="btn-secondary text-center py-3.5 text-base"
                 >
                   Book Demo
-                </Link>
-                <Link
-                  href="/contact"
+                </a>
+                <a
+                  href={getGoogleFormUrl()}
+                  target="_blank"
+                  rel="noreferrer"
                   onClick={() => setIsMobileOpen(false)}
                   className="btn-primary text-center py-3.5 text-base"
                 >
                   <span className="flex items-center justify-center gap-2">
                     Start Free <ArrowRight className="w-4 h-4" />
                   </span>
-                </Link>
+                </a>
               </motion.div>
             </motion.div>
           </motion.div>

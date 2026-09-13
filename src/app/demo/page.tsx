@@ -4,10 +4,49 @@ import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { SectionWrapper, GradientText, CursorGlow, GlowCard } from '@/components/ui';
 import { motion } from 'framer-motion';
-import { Play, Calendar, Check, Shield, ArrowRight, Clock, Sparkles } from 'lucide-react';
+import { Play, Calendar, Check, Shield, ArrowRight, Clock, Loader2, CheckCircle2 } from 'lucide-react';
 import Link from 'next/link';
+import { useState } from 'react';
+import { getGoogleFormUrl } from '@/lib/site-config';
 
 export default function DemoPage() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+  const openDemoForm = () => {
+    window.open(getGoogleFormUrl(), '_blank', 'noopener,noreferrer');
+  };
+
+  const handleBookDemo = async () => {
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: 'Demo request',
+          email: 'ayushbhardwaj942006@gmail.com',
+          message: 'Book demo CTA clicked',
+          source: 'demo-page',
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Request failed');
+      }
+
+      setSubmitStatus('success');
+      openDemoForm();
+    } catch {
+      setSubmitStatus('error');
+      openDemoForm();
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <>
       <CursorGlow />
@@ -93,24 +132,32 @@ export default function DemoPage() {
                     </div>
                     <h3 className="text-xl font-bold font-display mb-3">Book Your Demo</h3>
                     <p className="text-sm text-text-secondary mb-8">
-                      Pick a time that works for you. We&apos;ll send a WhatsApp confirmation.
+                      Tell us what you need and our team will follow up to arrange your personalized demo.
                     </p>
 
-                    {/* Calendly placeholder */}
-                    <div className="bg-white/[0.03] rounded-2xl border border-border p-8 mb-6">
-                      <Sparkles className="w-10 h-10 text-accent/40 mx-auto mb-3" />
-                      <p className="text-sm text-text-muted">
-                        Calendar scheduling widget will appear here.
-                      </p>
-                      <p className="text-xs text-text-muted mt-2">
-                        Powered by Calendly
-                      </p>
+                    <div className="bg-white/[0.03] rounded-2xl border border-border overflow-hidden mb-6 p-6">
+                      <button
+                        type="button"
+                        onClick={handleBookDemo}
+                        disabled={isSubmitting}
+                        className="btn-primary w-full justify-center gap-2"
+                      >
+                        {isSubmitting ? <><Loader2 className="w-4 h-4 animate-spin" /> Submitting...</> : <>Book your demo <Calendar className="w-4 h-4" /></>}
+                      </button>
+                      {submitStatus === 'success' && (
+                        <p className="mt-4 flex items-center justify-center gap-2 text-sm text-success">
+                          <CheckCircle2 className="w-4 h-4" /> Thanks! Your onboarding request has been received.
+                        </p>
+                      )}
+                      {submitStatus === 'error' && (
+                        <p className="mt-4 text-sm text-red-400">Something went wrong. Please try again.</p>
+                      )}
                     </div>
 
                     <p className="text-xs text-text-muted">
-                      Or email us directly at{' '}
-                      <a href="mailto:demo@inheriq.com" className="text-accent hover:underline">
-                        demo@inheriq.com
+                      Or email directly at{' '}
+                      <a href="mailto:ayushbhardwaj942006@gmail.com" className="text-accent hover:underline">
+                        ayushbhardwaj942006@gmail.com
                       </a>
                     </p>
                   </div>

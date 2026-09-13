@@ -42,9 +42,9 @@
   --animate-border-rotate: border-rotate 4s linear infinite;
 }
 
-/* ============================================
-   BASE STYLES
-   ============================================ */
+* {
+  box-sizing: border-box;
+}
 
 html {
   scroll-behavior: smooth;
@@ -56,8 +56,22 @@ body {
   color: #FFFFFF;
   font-family: var(--font-body);
   overflow-x: hidden;
+  min-width: 320px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+img,
+svg,
+canvas,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+a,
+button {
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* Custom Scrollbar */
@@ -389,6 +403,22 @@ body {
 @media (max-width: 768px) {
   .section-padding {
     padding: 4rem 0;
+  }
+
+  .cursor-glow {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .container-custom {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    width: 100%;
   }
 }
 

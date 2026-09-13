@@ -1,0 +1,25 @@
+{
+  "home": {
+    "pageTitle": "Inheriq — Your AI Workforce. Available 24/7.",
+    "metaDescription": "Hire AI employees for sales, marketing, HR, support, and finance. Built for Indian MSMEs with multilingual automation and 24/7 coverage.",
+    "keywords": "AI workforce, Indian MSME, AI agents, business automation, Inheriq",
+    "canonicalUrl": "http://localhost:3000/",
+    "ogTitle": "Inheriq — Your AI Workforce. Available 24/7.",
+    "ogDescription": "One dashboard. Five AI employees. Built for Indian businesses that want faster growth and smoother operations.",
+    "ogImage": "http://localhost:3000/og-image.png",
+    "twitterTitle": "Inheriq — Your AI Workforce. Available 24/7.",
+    "twitterDescription": "Hire AI employees for sales, marketing, HR, support, and finance — all in one place.",
+    "twitterImage": "http://localhost:3000/og-image.png",
+    "index": true,
+    "follow": true
+  },
+  "contact": {},
+  "demo": {},
+  "about": {},
+  "agents": {},
+  "industries": {},
+  "blog": {},
+  "careers": {},
+  "privacy": {},
+  "terms": {}
+}

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Manrope } from "next/font/google";
+import { SITE_CONFIG } from "@/lib/site-config";
 import "./globals.css";
 
 const inter = Inter({
@@ -15,9 +16,10 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_CONFIG.url),
   title: "Inheriq — Your AI Workforce. Available 24/7.",
   description:
-    "Hire 5 AI employees that work 24/7 — Sales, HR, Marketing, Support & Finance. Built for Indian MSMEs. One dashboard, no technical skills needed. Start your free trial today.",
+    "Hire AI employees that work 24/7 — sales, HR, marketing, support, and finance. Built for Indian businesses that want a faster, smarter operation without extra headcount.",
   keywords: [
     "AI workforce",
     "Indian MSME",
@@ -30,20 +32,25 @@ export const metadata: Metadata = {
     "Inheriq",
     "small business AI",
   ],
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     title: "Inheriq — Your AI Workforce. Available 24/7.",
     description:
-      "One dashboard. Five AI employees. Built for 63M+ Indian businesses.",
-    url: "https://inheriq.com",
+      "One dashboard. Five AI employees. Built for Indian businesses that want faster growth with more reliable operations.",
+    url: SITE_CONFIG.url,
     siteName: "Inheriq",
     type: "website",
     locale: "en_IN",
+    images: [{ url: "/og-image.svg", width: 1200, height: 630, alt: "Inheriq AI workforce dashboard" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Inheriq — Your AI Workforce. Available 24/7.",
     description:
-      "Hire 5 AI employees that work 24/7. Built for Indian MSMEs.",
+      "Hire AI employees that work 24/7. Built for Indian MSMEs and modern service businesses.",
+    images: ["/og-image.svg"],
   },
   robots: {
     index: true,

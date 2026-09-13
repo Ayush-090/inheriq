@@ -12,7 +12,6 @@ import { Dashboard } from '@/components/sections/Dashboard';
 import { Comparison } from '@/components/sections/Comparison';
 import { HowItWorks } from '@/components/sections/HowItWorks';
 import { Industries } from '@/components/sections/Industries';
-import { Pricing } from '@/components/sections/Pricing';
 import { Testimonials } from '@/components/sections/Testimonials';
 import { FAQ } from '@/components/sections/FAQ';
 import { FinalCTA } from '@/components/sections/FinalCTA';
@@ -33,7 +32,6 @@ export default function Home() {
         <Comparison />
         <HowItWorks />
         <Industries />
-        <Pricing />
         <Testimonials />
         <FAQ />
         <FinalCTA />

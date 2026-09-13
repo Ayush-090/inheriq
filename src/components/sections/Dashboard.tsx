@@ -36,7 +36,7 @@ export function Dashboard() {
               </div>
               <div className="text-xs text-text-muted flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-success animate-pulse" />
-                dashboard.inheriq.com
+                app.inheriq.in
               </div>
               <div className="w-16" />
             </div>

@@ -5,16 +5,44 @@ import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { SectionWrapper, GradientText, CursorGlow } from '@/components/ui';
 import { motion } from 'framer-motion';
-import { Send, Phone, Mail, MapPin, MessageSquare, ArrowRight, Calendar } from 'lucide-react';
+import { ExternalLink, Phone, Mail, MapPin, MessageSquare, Calendar, CheckCircle2, Loader2 } from 'lucide-react';
+import { getGoogleFormUrl } from '@/lib/site-config';
 
 export default function ContactPage() {
-  const [formState, setFormState] = useState({
-    name: '', email: '', phone: '', business: '', message: '', submitted: false,
-  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setFormState(prev => ({ ...prev, submitted: true }));
+  const handleBookDemo = () => {
+    window.open(getGoogleFormUrl(), '_blank', 'noopener,noreferrer');
+  };
+
+  const handleContactSubmit = async () => {
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: 'Website visitor',
+          email: 'ayushbhardwaj942006@gmail.com',
+          message: 'Contact page CTA clicked',
+          source: 'contact-page',
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Request failed');
+      }
+
+      setSubmitStatus('success');
+      handleBookDemo();
+    } catch {
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -58,9 +86,9 @@ export default function ContactPage() {
 
                 <div className="space-y-5">
                   {[
-                    { icon: Mail, label: 'Email us', value: 'hello@inheriq.com' },
-                    { icon: Phone, label: 'Call us', value: '+91 98765 43210' },
-                    { icon: MapPin, label: 'Based in', value: 'India 🇮🇳' },
+                    { icon: Mail, label: 'Email', value: 'ayushbhardwaj942006@gmail.com', href: 'mailto:ayushbhardwaj942006@gmail.com' },
+                    { icon: Phone, label: 'Phone', value: '+91 6201328257', href: 'tel:+916201328257' },
+                    { icon: MapPin, label: 'Founder', value: 'Ayush Bhardwaj', href: '/' },
                   ].map((item) => {
                     const Icon = item.icon;
                     return (
@@ -76,14 +104,20 @@ export default function ContactPage() {
                         </div>
                         <div>
                           <p className="text-sm text-text-secondary">{item.label}</p>
-                          <p className="font-medium">{item.value}</p>
+                          {item.href === '/' ? (
+                            <p className="font-medium">{item.value}</p>
+                          ) : (
+                            <a href={item.href} className="font-medium text-white hover:text-accent transition-colors">
+                              {item.value}
+                            </a>
+                          )}
                         </div>
                       </motion.div>
                     );
                   })}
                 </div>
 
-                {/* Calendly placeholder */}
+                {/* Demo link */}
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -97,9 +131,13 @@ export default function ContactPage() {
                   <p className="text-sm text-text-secondary mb-4">
                     Schedule a 15-minute demo to see how Inheriq can transform your business operations.
                   </p>
-                  <button className="btn-secondary text-sm w-full flex items-center justify-center gap-2">
+                  <button
+                    type="button"
+                    onClick={handleBookDemo}
+                    className="btn-secondary text-sm w-full flex items-center justify-center gap-2"
+                  >
                     <Calendar className="w-4 h-4" />
-                    Open Calendar
+                    Book via Form
                   </button>
                 </motion.div>
               </div>
@@ -110,88 +148,41 @@ export default function ContactPage() {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.2 }}
               >
-                {formState.submitted ? (
-                  <div className="glass-card p-10 text-center">
-                    <div className="w-16 h-16 rounded-full bg-success/20 flex items-center justify-center mx-auto mb-5">
-                      <Send className="w-7 h-7 text-success" />
-                    </div>
-                    <h3 className="text-2xl font-bold font-display mb-3">Message Sent!</h3>
-                    <p className="text-text-secondary">
-                      We&apos;ll get back to you within 2 hours. Check your WhatsApp and email.
+                <div className="glass-card overflow-hidden">
+                  <div className="p-6 sm:p-8 pb-4">
+                    <h3 className="text-lg font-bold mb-2">Tell us about your business</h3>
+                    <p className="text-sm text-text-secondary">
+                      Complete the form and our team will get back to you within 2 hours.
                     </p>
                   </div>
-                ) : (
-                  <form onSubmit={handleSubmit} className="glass-card p-6 sm:p-8 space-y-5">
-                    <h3 className="text-lg font-bold mb-2">Send us a message</h3>
-
-                    <div>
-                      <label className="block text-sm text-text-secondary mb-2">Your Name *</label>
-                      <input
-                        type="text"
-                        required
-                        value={formState.name}
-                        onChange={(e) => setFormState(prev => ({ ...prev, name: e.target.value }))}
-                        className="w-full px-4 py-3 rounded-xl bg-white/[0.03] border border-border text-white placeholder:text-text-muted focus:border-accent/50 focus:outline-none focus:ring-1 focus:ring-accent/20 transition-all"
-                        placeholder="Rajesh Patel"
-                      />
+                  <div className="p-6 sm:p-8">
+                    <div className="rounded-2xl border border-dashed border-border bg-white/[0.02] p-6 text-center">
+                      <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10 text-accent">
+                        <MessageSquare className="h-5 w-5" />
+                      </div>
+                      <h4 className="mt-4 text-xl font-semibold">Start your onboarding</h4>
+                      <p className="mt-2 text-sm text-text-secondary">
+                        We use a Google Form to collect onboarding details in a structured way.
+                      </p>
+                      <button
+                        type="button"
+                        onClick={handleContactSubmit}
+                        disabled={isSubmitting}
+                        className="btn-primary mt-6 w-full justify-center gap-2"
+                      >
+                        {isSubmitting ? <><Loader2 className="h-4 w-4 animate-spin" /> Submitting...</> : <>Open onboarding form <ExternalLink className="h-4 w-4" /></>}
+                      </button>
+                      {submitStatus === 'success' && (
+                        <p className="mt-4 flex items-center justify-center gap-2 text-sm text-success">
+                          <CheckCircle2 className="h-4 w-4" /> Thanks! Your onboarding request is being sent.
+                        </p>
+                      )}
+                      {submitStatus === 'error' && (
+                        <p className="mt-4 text-sm text-red-400">Something went wrong. Please try again.</p>
+                      )}
                     </div>
-
-                    <div>
-                      <label className="block text-sm text-text-secondary mb-2">Email *</label>
-                      <input
-                        type="email"
-                        required
-                        value={formState.email}
-                        onChange={(e) => setFormState(prev => ({ ...prev, email: e.target.value }))}
-                        className="w-full px-4 py-3 rounded-xl bg-white/[0.03] border border-border text-white placeholder:text-text-muted focus:border-accent/50 focus:outline-none focus:ring-1 focus:ring-accent/20 transition-all"
-                        placeholder="rajesh@business.com"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-sm text-text-secondary mb-2">Phone (WhatsApp)</label>
-                      <input
-                        type="tel"
-                        value={formState.phone}
-                        onChange={(e) => setFormState(prev => ({ ...prev, phone: e.target.value }))}
-                        className="w-full px-4 py-3 rounded-xl bg-white/[0.03] border border-border text-white placeholder:text-text-muted focus:border-accent/50 focus:outline-none focus:ring-1 focus:ring-accent/20 transition-all"
-                        placeholder="+91 98765 43210"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-sm text-text-secondary mb-2">Business Type</label>
-                      <input
-                        type="text"
-                        value={formState.business}
-                        onChange={(e) => setFormState(prev => ({ ...prev, business: e.target.value }))}
-                        className="w-full px-4 py-3 rounded-xl bg-white/[0.03] border border-border text-white placeholder:text-text-muted focus:border-accent/50 focus:outline-none focus:ring-1 focus:ring-accent/20 transition-all"
-                        placeholder="e.g., Dental Clinic, Restaurant, Gym"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-sm text-text-secondary mb-2">Message</label>
-                      <textarea
-                        rows={4}
-                        value={formState.message}
-                        onChange={(e) => setFormState(prev => ({ ...prev, message: e.target.value }))}
-                        className="w-full px-4 py-3 rounded-xl bg-white/[0.03] border border-border text-white placeholder:text-text-muted focus:border-accent/50 focus:outline-none focus:ring-1 focus:ring-accent/20 transition-all resize-none"
-                        placeholder="Tell us about your business and what you'd like to automate..."
-                      />
-                    </div>
-
-                    <button type="submit" className="btn-primary w-full py-3.5">
-                      <span className="flex items-center justify-center gap-2">
-                        Send Message <ArrowRight className="w-4 h-4" />
-                      </span>
-                    </button>
-
-                    <p className="text-xs text-text-muted text-center">
-                      We&apos;ll respond within 2 hours · No spam, ever
-                    </p>
-                  </form>
-                )}
+                  </div>
+                </div>
               </motion.div>
             </div>
           </div>

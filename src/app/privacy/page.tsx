@@ -57,7 +57,7 @@ export default function PrivacyPage() {
               <p className="text-text-secondary leading-relaxed">
                 You have the right to access, correct, or delete your personal information at any time.
                 You may also request a copy of your data or ask us to stop processing your information.
-                Contact us at privacy@inheriq.com to exercise these rights.
+                Contact us at ayushbhardwaj942006@gmail.com to exercise these rights.
               </p>
             </section>
 
@@ -74,8 +74,8 @@ export default function PrivacyPage() {
               <h2 className="text-xl font-bold mb-3">7. Contact Us</h2>
               <p className="text-text-secondary leading-relaxed">
                 If you have questions about this Privacy Policy, please contact us at{' '}
-                <a href="mailto:privacy@inheriq.com" className="text-accent hover:underline">
-                  privacy@inheriq.com
+                <a href="mailto:ayushbhardwaj942006@gmail.com" className="text-accent hover:underline">
+                  ayushbhardwaj942006@gmail.com
                 </a>.
               </p>
             </section>

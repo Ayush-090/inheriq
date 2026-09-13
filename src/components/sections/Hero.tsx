@@ -1,9 +1,9 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ArrowRight, Play, Sparkles, Bell, TrendingUp, Users, Phone, IndianRupee, Megaphone, ShieldCheck } from 'lucide-react';
+import { ArrowRight, Sparkles, Bell, ShieldCheck } from 'lucide-react';
 import { useState, useEffect } from 'react';
-import Link from 'next/link';
+import { getGoogleFormUrl } from '@/lib/site-config';
 
 const notifications = [
   { text: 'Arjun booked 3 sales meetings on WhatsApp', color: '#5B8CFF', delay: 1 },
@@ -221,14 +221,14 @@ export function Hero() {
               transition={{ duration: 0.8, delay: 0.45 }}
               className="flex flex-wrap items-center gap-4 mb-10"
             >
-              <Link href="/pricing" className="btn-primary text-base px-8 py-4 shadow-xl shadow-accent/25">
+              <a href={getGoogleFormUrl()} target="_blank" rel="noreferrer" className="btn-primary text-base px-8 py-4 shadow-xl shadow-accent/25">
                 <span className="flex items-center gap-2">
                   Get Inheriq AI <ArrowRight className="w-5 h-5" />
                 </span>
-              </Link>
-              <Link href="/demo" className="btn-secondary text-base px-7 py-4">
+              </a>
+              <a href={getGoogleFormUrl()} target="_blank" rel="noreferrer" className="btn-secondary text-base px-7 py-4">
                 Book 1-on-1 Demo
-              </Link>
+              </a>
             </motion.div>
 
             {/* Trust Badges */}

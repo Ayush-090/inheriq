@@ -1,27 +1,12 @@
-import { 
+import {
   Phone, Users, Megaphone, HeadphonesIcon, IndianRupee,
   CalendarCheck, UserCheck, Target, ClipboardList, Clock,
   MessageSquare, Mail, BarChart3, FileText, Bell,
   Heart, UtensilsCrossed, Scissors, Dumbbell, ShoppingBag,
-  GraduationCap, Building2, Plane, Briefcase, Brain, Zap, Sparkles, Shield
+  GraduationCap, Building2, Plane, Briefcase, Brain, Zap, Sparkles, Shield,
 } from 'lucide-react';
 
-export const SITE_CONFIG = {
-  name: 'Inheriq',
-  tagline: 'Your 24/7 AI Workforce Team',
-  description: 'Build and scale your small business with AI employees — smart 24/7 digital workers designed to answer calls, handle WhatsApp, book meetings, run marketing, track payments, and manage HR.',
-  url: 'https://inheriq.com',
-};
-
-export const NAV_LINKS = [
-  { label: 'Home', href: '/' },
-  { label: 'AI Employees', href: '/agents' },
-  { label: 'Brain AI', href: '#brain-ai' },
-  { label: 'Industries', href: '/industries' },
-  { label: 'Pricing', href: '/pricing' },
-  { label: 'About', href: '/about' },
-  { label: 'Contact', href: '/contact' },
-];
+export { SITE_CONFIG, PUBLIC_NAV_LINKS as NAV_LINKS } from './site-config';
 
 export const AGENTS = [
   {
@@ -88,7 +73,6 @@ export const AGENTS = [
       'Generates social posts & ad copy in local languages',
       'Re-engages past customers automatically',
       'Tracks campaign open rates, clicks & ROI',
-      'Creates promotional flyers & offer templates',
     ],
     samplePrompt: '“Create a Diwali promotional WhatsApp blast for 10% off on all clinic services.”',
     sampleOutput: '“🎉 Diwali Special Offer! Get 10% off dental checkups this week. Click here to book your slot!”',
@@ -192,7 +176,6 @@ export const COMPARISON = {
     ['Response Time', '30 mins to several hours', 'Under 10 seconds on Voice & WhatsApp'],
     ['Memory & Accuracy', 'Human forgetfulness & manual errors', '100% accurate memory with Inheriq Brain AI'],
     ['Reporting', 'Weekly or monthly manual reports', 'Instant daily WhatsApp summaries at 8 PM'],
-    ['Monthly Cost', '₹60,000+ for 3-4 salaries + software', 'Starts at ₹4,999/month all-inclusive'],
   ],
 };
 
@@ -214,80 +197,6 @@ export const INDUSTRIES = [
   { name: 'Real Estate & Builders', icon: Building2, description: 'Property inquiries, automated site visit booking, long-term lead nurturing', color: '#5B8CFF' },
   { name: 'Travel & Tours', icon: Plane, description: 'Itinerary sharing, booking confirmations, 24/7 customer support', color: '#00D68F' },
   { name: 'Professional Agencies', icon: Briefcase, description: 'Client onboarding, milestone updates, GST invoicing & automated payment recovery', color: '#FFB547' },
-];
-
-export const PRICING_PLANS = [
-  {
-    name: 'Starter Worker',
-    price: '₹4,999',
-    period: '/month',
-    description: 'Ideal for solo entrepreneurs & small shops starting with AI.',
-    features: [
-      '1 AI Employee of your choice (e.g., Arjun for Sales)',
-      'WhatsApp Business & Call integration',
-      'Up to 1,000 conversations/mo',
-      'Hindi, English & Hinglish support',
-      'Inheriq Brain AI (Basic Memory)',
-      'Daily WhatsApp briefing at 8 PM',
-      'Standard support',
-    ],
-    highlighted: false,
-    cta: 'Hire Starter AI',
-  },
-  {
-    name: 'Growth Team',
-    price: '₹9,999',
-    period: '/month',
-    description: 'For growing businesses needing a 3-agent digital team.',
-    features: [
-      '3 AI Employees (Sales, Support & Finance)',
-      'WhatsApp + Voice Call integration',
-      'Up to 3,500 conversations/mo',
-      'Hindi, English + 2 Regional languages',
-      'Inheriq Brain AI (Full Memory & PDFs)',
-      'Automated WhatsApp campaigns',
-      'Priority support',
-      'Tally & Razorpay integration',
-    ],
-    highlighted: false,
-    cta: 'Hire Growth Team',
-  },
-  {
-    name: 'Full AI Workforce',
-    price: '₹19,999',
-    period: '/month',
-    description: 'Complete 5-employee digital team for scale.',
-    features: [
-      'All 5 AI Employees (Arjun, Kavya, Rohan, Priya, Vikram)',
-      'Unlimited WhatsApp + Voice + Email conversations',
-      'All 7 Indian languages supported',
-      'Advanced Inheriq Brain AI (Custom training & CRM sync)',
-      'Real-time live operator dashboard',
-      'Automated payment recovery & invoicing',
-      'Dedicated Customer Success Manager',
-      'API & Custom Integration access',
-    ],
-    highlighted: true,
-    cta: 'Hire Full Workforce',
-    badge: 'Most Popular',
-  },
-  {
-    name: 'Enterprise Scale',
-    price: 'Custom',
-    period: '',
-    description: 'For multi-location chains, franchises & large enterprises.',
-    features: [
-      'Custom AI Employee personas & workflows',
-      'Multi-branch / Multi-number management',
-      'On-premise or private cloud option',
-      'Guaranteed 99.9% Uptime SLA',
-      'Custom ERP/CRM deep integrations',
-      'Dedicated engineering support',
-      'Custom DPDP compliance & audit',
-    ],
-    highlighted: false,
-    cta: 'Contact Enterprise Team',
-  },
 ];
 
 export const TESTIMONIALS = [

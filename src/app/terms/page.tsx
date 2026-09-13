@@ -89,8 +89,8 @@ export default function TermsPage() {
               <h2 className="text-xl font-bold mb-3">9. Contact</h2>
               <p className="text-text-secondary leading-relaxed">
                 For questions about these Terms, please contact us at{' '}
-                <a href="mailto:legal@inheriq.com" className="text-accent hover:underline">
-                  legal@inheriq.com
+                <a href="mailto:ayushbhardwaj942006@gmail.com" className="text-accent hover:underline">
+                  ayushbhardwaj942006@gmail.com
                 </a>.
               </p>
             </section>
