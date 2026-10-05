@@ -4,7 +4,7 @@ import { saveSubmission } from '@/lib/data-store';
 
 const contactSchema = z.object({
   name: z.string().min(1).max(120),
-  email: z.string().email().max(150),
+  email: z.string().email().max(150).optional(),
   phone: z.string().optional(),
   company: z.string().optional(),
   businessType: z.string().optional(),
@@ -31,6 +31,7 @@ export async function POST(request: Request) {
 
     const record = await saveSubmission({
       ...parsed.data,
+      email: parsed.data.email || '',
       status: 'New',
       sourceType: parsed.data.sourceType || 'contact',
     });

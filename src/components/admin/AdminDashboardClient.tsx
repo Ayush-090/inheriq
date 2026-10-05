@@ -156,7 +156,7 @@ export function AdminDashboardClient({ initialSubmissions }: { initialSubmission
                     >
                       <div>
                         <p className="font-semibold">{submission.name}</p>
-                        <p className="text-xs text-text-muted">{submission.email}</p>
+                        <p className="text-xs text-text-muted">{submission.email || 'WhatsApp lead'}</p>
                       </div>
                       <div className="text-sm text-text-secondary">{submission.company || '-'}</div>
                       <div className="text-sm text-text-secondary">{submission.businessType || '-'}</div>
@@ -184,7 +184,7 @@ export function AdminDashboardClient({ initialSubmissions }: { initialSubmission
                 </div>
 
                 <dl className="space-y-3 text-sm text-text-secondary">
-                  <div className="flex justify-between gap-4"><dt>Email</dt><dd className="text-right text-white">{selectedSubmission.email}</dd></div>
+                  <div className="flex justify-between gap-4"><dt>Email</dt><dd className="text-right text-white">{selectedSubmission.email || 'WhatsApp lead'}</dd></div>
                   <div className="flex justify-between gap-4"><dt>Phone</dt><dd className="text-right text-white">{selectedSubmission.phone || '-'}</dd></div>
                   <div className="flex justify-between gap-4"><dt>Company</dt><dd className="text-right text-white">{selectedSubmission.company || '-'}</dd></div>
                   <div className="flex justify-between gap-4"><dt>Stage</dt><dd className="text-right text-white">{selectedSubmission.businessStage || '-'}</dd></div>

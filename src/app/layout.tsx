@@ -1,17 +1,48 @@
 import type { Metadata } from "next";
-import { Inter, Manrope } from "next/font/google";
+import {
+  Instrument_Serif,
+  Hanken_Grotesk,
+  JetBrains_Mono,
+  Tiro_Devanagari_Hindi,
+  Hind,
+} from "next/font/google";
 import { SITE_CONFIG } from "@/lib/site-config";
 import "./globals.css";
 
-const inter = Inter({
-  variable: "--font-inter",
+const instrumentSerif = Instrument_Serif({
+  variable: "--font-instrument-serif",
+  weight: "400",
+  subsets: ["latin"],
+  display: "swap",
+  preload: true,
+});
+
+const hankenGrotesk = Hanken_Grotesk({
+  variable: "--font-hanken-grotesk",
+  weight: ["400", "500", "600"],
   subsets: ["latin"],
   display: "swap",
 });
 
-const manrope = Manrope({
-  variable: "--font-manrope",
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-jetbrains-mono",
+  weight: ["400", "500"],
   subsets: ["latin"],
+  display: "swap",
+});
+
+const tiroHindi = Tiro_Devanagari_Hindi({
+  variable: "--font-tiro-hindi",
+  weight: "400",
+  subsets: ["devanagari", "latin"],
+  display: "swap",
+  preload: true,
+});
+
+const hind = Hind({
+  variable: "--font-hind",
+  weight: ["400", "500", "600"],
+  subsets: ["devanagari", "latin"],
   display: "swap",
 });
 
@@ -56,6 +87,15 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: '48x48' },
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/inheriq-logo.svg', type: 'image/svg+xml' },
+    ],
+    apple: '/apple-touch-icon.png',
+    shortcut: '/favicon.ico',
+  },
 };
 
 export default function RootLayout({
@@ -66,12 +106,12 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${manrope.variable} dark antialiased`}
-      style={{ scrollBehavior: "smooth" }}
+      data-scroll-behavior="smooth"
+      className={`${instrumentSerif.variable} ${hankenGrotesk.variable} ${jetbrainsMono.variable} ${tiroHindi.variable} ${hind.variable} dark antialiased`}
     >
       <body
         className="min-h-screen bg-bg-primary text-text-primary"
-        style={{ fontFamily: "var(--font-inter), sans-serif" }}
+        style={{ fontFamily: "var(--font-hanken-grotesk), sans-serif" }}
       >
         {children}
       </body>
