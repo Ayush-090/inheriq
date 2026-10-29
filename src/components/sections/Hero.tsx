@@ -1,270 +1,433 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { ArrowRight, Sparkles, Bell, ShieldCheck } from 'lucide-react';
 import { useState, useEffect } from 'react';
-import { getGoogleFormUrl } from '@/lib/site-config';
+import { motion } from 'framer-motion';
+import {
+  ArrowRight,
+  Sparkles,
+  ShieldCheck,
+  CheckCircle2,
+  Clock,
+  PhoneCall,
+  Headphones,
+  Users,
+  IndianRupee,
+  Megaphone,
+  Check,
+  Play,
+  UserCheck,
+} from 'lucide-react';
+import { DemoModal } from '@/components/ui/DemoModal';
 
-const notifications = [
-  { text: 'Arjun booked 3 sales meetings on WhatsApp', color: '#5B8CFF', delay: 1 },
-  { text: 'Kavya generated 46 payslips for warehouse staff', color: '#7B61FF', delay: 3.5 },
-  { text: 'Rohan sent Diwali WhatsApp blast to 3,850 clients', color: '#00D68F', delay: 6 },
-  { text: 'Vikram recovered ₹18,500 pending invoice via UPI', color: '#FFB547', delay: 8.5 },
-  { text: 'Priya answered 78 customer queries in Hindi 24/7', color: '#FF6B8A', delay: 11 },
-];
-
-function DashboardMockup() {
-  const [activeNotif, setActiveNotif] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveNotif((prev) => (prev + 1) % notifications.length);
-    }, 3200);
-    return () => clearInterval(interval);
-  }, []);
-
-  return (
-    <div className="relative w-full max-w-[620px] mx-auto">
-      {/* High impact glow backdrop */}
-      <div className="absolute -inset-10 bg-gradient-to-tr from-accent/20 via-secondary/15 to-emerald-500/10 blur-[120px] rounded-full pointer-events-none" />
-
-      {/* Main dashboard card */}
-      <motion.div
-        initial={{ opacity: 0, y: 30, rotateX: 4 }}
-        animate={{ opacity: 1, y: 0, rotateX: 0 }}
-        transition={{ duration: 1, delay: 0.4 }}
-        className="relative glass-strong p-5 sm:p-6 shadow-2xl border-white/10 rounded-3xl"
-        style={{ perspective: '1000px' }}
-      >
-        {/* Header bar */}
-        <div className="flex items-center justify-between mb-5 border-b border-border pb-3">
-          <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded-full bg-red-400/80" />
-            <div className="w-3 h-3 rounded-full bg-yellow-400/80" />
-            <div className="w-3 h-3 rounded-full bg-green-400/80" />
-            <span className="text-xs text-text-muted ml-2 font-mono">inheriq.app/dashboard</span>
-          </div>
-          <div className="flex items-center gap-2 text-xs text-success bg-success/10 px-2.5 py-1 rounded-full border border-success/20">
-            <span className="w-2 h-2 rounded-full bg-success animate-ping" />
-            <span>5 Digital Workers Active</span>
-          </div>
-        </div>
-
-        {/* AI Workers Pills Bar */}
-        <div className="flex gap-2 mb-5 overflow-x-auto pb-1">
-          {[
-            { name: 'Arjun (Sales)', color: '#5B8CFF', active: true },
-            { name: 'Kavya (HR)', color: '#7B61FF', active: false },
-            { name: 'Rohan (Marketing)', color: '#00D68F', active: false },
-            { name: 'Priya (Support)', color: '#FF6B8A', active: false },
-            { name: 'Vikram (Finance)', color: '#FFB547', active: false },
-          ].map((worker) => (
-            <div
-              key={worker.name}
-              className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all duration-300 flex items-center gap-1.5 ${
-                worker.active
-                  ? 'bg-accent/20 text-accent border border-accent/40 shadow-sm'
-                  : 'text-text-secondary border border-border bg-white/[0.02]'
-              }`}
-            >
-              <span className="w-2 h-2 rounded-full" style={{ backgroundColor: worker.color }} />
-              {worker.name}
-            </div>
-          ))}
-        </div>
-
-        {/* Metrics Row */}
-        <div className="grid grid-cols-4 gap-2 sm:gap-3 mb-5">
-          {[
-            { label: 'Leads Contacted', value: '38', change: '+18 today' },
-            { label: 'Meetings Booked', value: '12', change: '100% on WhatsApp' },
-            { label: 'Queries Answered', value: '78', change: '<6s response' },
-            { label: 'Revenue Recovered', value: '₹3.1L', change: '+96% dues' },
-          ].map((metric) => (
-            <div key={metric.label} className="bg-white/[0.03] rounded-xl p-2.5 sm:p-3 border border-border">
-              <p className="text-[10px] text-text-muted font-medium truncate">{metric.label}</p>
-              <p className="text-base sm:text-lg font-bold mt-0.5 text-white">{metric.value}</p>
-              <p className="text-[9px] text-success font-medium mt-0.5 truncate">{metric.change}</p>
-            </div>
-          ))}
-        </div>
-
-        {/* Performance Chart Simulation */}
-        <div className="bg-white/[0.02] rounded-2xl p-4 border border-border mb-4">
-          <div className="flex items-center justify-between mb-3">
-            <span className="text-xs font-semibold text-text-secondary">Weekly Business Automation Output</span>
-            <span className="text-xs text-success font-semibold">3.4x ROI Achieved ↑</span>
-          </div>
-          <div className="flex items-end gap-2 h-16">
-            {[35, 52, 45, 68, 60, 82, 94].map((h, i) => (
-              <motion.div
-                key={i}
-                initial={{ height: 0 }}
-                animate={{ height: `${h}%` }}
-                transition={{ duration: 0.8, delay: 0.6 + i * 0.08 }}
-                className="flex-1 rounded-t-md bg-gradient-to-t from-accent/30 via-accent/70 to-secondary"
-              />
-            ))}
-          </div>
-          <div className="flex justify-between mt-2">
-            {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((d) => (
-              <span key={d} className="text-[9px] text-text-muted flex-1 text-center font-medium">{d}</span>
-            ))}
-          </div>
-        </div>
-
-        {/* Live Conversation Stream */}
-        <div className="space-y-2">
-          {[
-            { worker: 'Arjun', msg: 'Booked root canal appointment for Ramesh Kumar (4 PM)', time: '2m', tag: 'Sales' },
-            { worker: 'Priya', msg: 'Answered clinic parking query in Hindi automatically', time: '5m', tag: 'Support' },
-            { worker: 'Vikram', msg: 'Invoice #1290 (₹18,500) paid via UPI link', time: '12m', tag: 'Finance' },
-          ].map((item, i) => (
-            <motion.div
-              key={item.worker + i}
-              initial={{ opacity: 0, x: -15 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 1 + i * 0.15 }}
-              className="flex items-center gap-3 p-2.5 rounded-xl bg-white/[0.03] border border-border"
-            >
-              <div className="w-8 h-8 rounded-xl bg-accent/20 flex items-center justify-center text-xs font-bold text-accent shrink-0">
-                {item.worker[0]}
-              </div>
-              <div className="flex-1 min-w-0">
-                <p className="text-xs font-semibold text-white truncate">{item.worker} — {item.msg}</p>
-              </div>
-              <span className="text-[9px] px-2 py-0.5 rounded-md bg-accent/15 text-accent font-medium shrink-0">
-                {item.tag}
-              </span>
-            </motion.div>
-          ))}
-        </div>
-      </motion.div>
-
-      {/* Floating Animated Notification */}
-      <motion.div
-        key={activeNotif}
-        initial={{ opacity: 0, y: 15, scale: 0.95 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
-        exit={{ opacity: 0, y: -10 }}
-        transition={{ duration: 0.4 }}
-        className="absolute -top-5 -right-2 sm:-right-4 glass-strong px-4 py-3 flex items-center gap-3 shadow-2xl border-accent/30 z-20 rounded-2xl"
-      >
-        <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-accent to-secondary flex items-center justify-center text-white shrink-0 shadow-md">
-          <Bell className="w-4 h-4" />
-        </div>
-        <div>
-          <p className="text-xs font-bold text-white">{notifications[activeNotif].text}</p>
-          <p className="text-[10px] text-text-muted">Inheriq AI Employee · Just Now</p>
-        </div>
-      </motion.div>
-    </div>
-  );
+interface AgentCardData {
+  id: string;
+  name: string;
+  role: string;
+  icon: typeof PhoneCall;
+  accent: string;
+  accentBg: string;
+  status: string;
+  task: string;
 }
 
+const HERO_AGENTS: AgentCardData[] = [
+  {
+    id: 'sales',
+    name: 'Sales AI',
+    role: 'Lead Qualification',
+    icon: PhoneCall,
+    accent: '#3B82F6',
+    accentBg: 'rgba(59, 130, 246, 0.15)',
+    status: 'In Call',
+    task: 'Qualifying enterprise inquiry from Dr. Mehta',
+  },
+  {
+    id: 'support',
+    name: 'Support AI',
+    role: 'Customer Inquiries',
+    icon: Headphones,
+    accent: '#EC4899',
+    accentBg: 'rgba(236, 72, 153, 0.15)',
+    status: 'Drafting',
+    task: 'SLA upgrade inquiry · response ready for review',
+  },
+  {
+    id: 'hr',
+    name: 'HR AI',
+    role: 'Recruiting & Queries',
+    icon: Users,
+    accent: '#8B5CF6',
+    accentBg: 'rgba(139, 92, 246, 0.15)',
+    status: 'Active',
+    task: 'Screened 3 frontend resumes against job spec',
+  },
+  {
+    id: 'finance',
+    name: 'Finance AI',
+    role: 'Invoice & Cashflow',
+    icon: IndianRupee,
+    accent: '#F59E0B',
+    accentBg: 'rgba(245, 158, 11, 0.15)',
+    status: 'Reconciled',
+    task: '₹18,500 pending invoice recovered via UPI link',
+  },
+  {
+    id: 'marketing',
+    name: 'Marketing AI',
+    role: 'Campaign Assistance',
+    icon: Megaphone,
+    accent: '#10B981',
+    accentBg: 'rgba(16, 185, 129, 0.15)',
+    status: 'Scheduled',
+    task: 'Product update broadcast scheduled for 2:00 PM',
+  },
+];
+
+const TASK_STAGES = [
+  {
+    stage: 'Assigned',
+    title: 'Customer requested SLA pricing on WhatsApp',
+    badge: '1. Task Inbound',
+    time: '10:14 AM',
+  },
+  {
+    stage: 'In Progress',
+    title: 'Support AI drafted verified policy quote',
+    badge: '2. AI Draft Ready',
+    time: '10:14 AM',
+  },
+  {
+    stage: 'Human Review',
+    title: 'Operations Manager reviewed & signed off',
+    badge: '3. Human Approved',
+    time: '10:15 AM',
+  },
+  {
+    stage: 'Completed',
+    title: 'Response dispatched & logged to CRM audit trail',
+    badge: '4. Dispatched',
+    time: 'Just now',
+  },
+];
+
 export function Hero() {
+  const [activeStage, setActiveStage] = useState(0);
+  const [isDemoModalOpen, setIsDemoModalOpen] = useState(false);
+  const [selectedAgentHero, setSelectedAgentHero] = useState<string>('sales');
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveStage((prev) => (prev + 1) % TASK_STAGES.length);
+    }, 3600);
+    return () => clearInterval(timer);
+  }, []);
+
+  const handleScrollTo = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) {
+      const offset = 80;
+      const elementPosition = el.getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({
+        top: elementPosition - offset,
+        behavior: 'smooth',
+      });
+    }
+  };
+
   return (
-    <section className="relative min-h-screen flex items-center pt-24 pb-16 overflow-hidden">
-      {/* Background radial lights */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-[700px] h-[700px] bg-accent/[0.08] rounded-full blur-[160px] animate-pulse" />
-        <div className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] bg-secondary/[0.08] rounded-full blur-[160px] animate-pulse" style={{ animationDelay: '1.5s' }} />
+    <section className="relative pt-32 pb-20 md:pt-36 md:pb-28 overflow-hidden bg-gradient-to-b from-[#F8FAFC] via-[#FDFEFE] to-white">
+      {/* Subtle background grid & radial light */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div
-          className="absolute inset-0 opacity-[0.02]"
+          className="absolute inset-0 opacity-[0.03]"
           style={{
-            backgroundImage: 'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)',
-            backgroundSize: '40px 40px',
+            backgroundImage:
+              'linear-gradient(#0F172A 1px, transparent 1px), linear-gradient(90deg, #0F172A 1px, transparent 1px)',
+            backgroundSize: '48px 48px',
           }}
         />
+        <div className="absolute -top-32 right-1/4 w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[140px]" />
+        <div className="absolute top-1/2 left-0 w-[400px] h-[400px] bg-indigo-500/5 rounded-full blur-[140px]" />
       </div>
 
       <div className="container-custom relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-10 items-center">
-          {/* Left Copy */}
-          <div className="max-w-2xl">
-            {/* Pill Badge */}
+        <div className="grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+          {/* Left Column: Core Messaging */}
+          <div className="lg:col-span-6 space-y-6 max-w-2xl">
+            {/* Trust Pill */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-accent/30 bg-accent/10 text-xs sm:text-sm font-semibold mb-6 text-accent shadow-sm"
+              transition={{ duration: 0.5 }}
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-200/80 text-blue-700 text-xs font-semibold shadow-xs"
             >
-              <Sparkles className="w-4 h-4" />
-              <span>AI Employees: Your 24/7 Digital Team</span>
+              <Sparkles className="w-3.5 h-3.5 text-blue-600" />
+              <span>AI Workforce Operating System for Startups & SMBs</span>
             </motion.div>
 
             {/* Main Headline */}
             <motion.h1
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.15 }}
-              className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight leading-[1.08] font-display mb-6"
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="text-4xl sm:text-5xl lg:text-[3.75rem] font-extrabold tracking-tight font-display text-slate-900 leading-[1.08]"
             >
-              Hire Your First{' '}
-              <span className="gradient-text">AI Employees Team</span> That Never Sleep.
+              Build Your <span className="text-blue-600">AI Workforce.</span>
             </motion.h1>
 
-            {/* Subheading */}
+            {/* Supporting Headline */}
             <motion.p
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-              className="text-base sm:text-lg text-text-secondary leading-relaxed mb-8 max-w-xl"
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="text-lg sm:text-xl font-semibold text-slate-800 tracking-tight"
             >
-              Get Arjun, Kavya, Rohan, Priya & Vikram — a complete 24/7 digital team that handles your calls, WhatsApp, sales, marketing, customer support, invoicing, and HR without adding headcount.
+              AI teammates that help your business sell, support, and scale.
             </motion.p>
 
-            {/* CTAs */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
+            {/* Description */}
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.45 }}
-              className="flex flex-wrap items-center gap-4 mb-10"
+              transition={{ duration: 0.6, delay: 0.25 }}
+              className="text-base text-slate-600 leading-relaxed"
             >
-              <a href={getGoogleFormUrl()} target="_blank" rel="noreferrer" className="btn-primary text-base px-8 py-4 shadow-xl shadow-accent/25">
-                <span className="flex items-center gap-2">
-                  Get Inheriq AI <ArrowRight className="w-5 h-5" />
-                </span>
-              </a>
-              <a href={getGoogleFormUrl()} target="_blank" rel="noreferrer" className="btn-secondary text-base px-7 py-4">
-                Book 1-on-1 Demo
-              </a>
+              Bring specialized AI employees into your workflows, assign tasks, and keep people in control.
+            </motion.p>
+
+            {/* Action CTAs */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.35 }}
+              className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2"
+            >
+              <button
+                type="button"
+                onClick={() => handleScrollTo('ai-employees')}
+                className="btn-primary text-base py-3.5 px-6 shadow-md shadow-blue-500/25 justify-center"
+              >
+                <span>Explore AI Employees</span>
+                <ArrowRight className="w-4 h-4 ml-1" />
+              </button>
+
+              <button
+                type="button"
+                onClick={() => handleScrollTo('how-it-works')}
+                className="btn-secondary text-base py-3.5 px-6 justify-center"
+              >
+                <span>See How It Works</span>
+              </button>
             </motion.div>
 
-            {/* Trust Badges */}
+            {/* Trust and Control Highlights */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.7 }}
-              className="flex flex-wrap items-center gap-6 text-text-muted text-xs font-medium pt-2 border-t border-border"
+              transition={{ duration: 0.8, delay: 0.5 }}
+              className="pt-6 border-t border-slate-200/80 grid grid-cols-2 sm:grid-cols-3 gap-3 text-xs text-slate-600"
             >
-              <div className="flex items-center gap-2 text-text-secondary">
-                <ShieldCheck className="w-4 h-4 text-success" />
-                <span>7-Day Risk-Free Trial</span>
+              <div className="flex items-center gap-2">
+                <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
+                <span>Human-in-the-Loop</span>
               </div>
-              <div className="w-px h-4 bg-border hidden sm:block" />
-              <div className="flex items-center gap-2 text-text-secondary">
-                <span className="w-2 h-2 rounded-full bg-success animate-pulse" />
-                <span>Supports Hindi, Hinglish & Regional</span>
+              <div className="flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-blue-600 shrink-0" />
+                <span>Configurable Roles</span>
               </div>
-              <div className="w-px h-4 bg-border hidden md:block" />
-              <div className="text-text-secondary hidden md:block">
-                No Coding Needed
+              <div className="flex items-center gap-2 col-span-2 sm:col-span-1">
+                <Clock className="w-4 h-4 text-purple-600 shrink-0" />
+                <span>Under 10s Response</span>
               </div>
             </motion.div>
           </div>
 
-          {/* Right Dashboard Mockup */}
+          {/* Right Column: Animated Product Composition */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1, delay: 0.3 }}
-            className="relative"
+            initial={{ opacity: 0, scale: 0.96, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="lg:col-span-6 relative"
           >
-            <DashboardMockup />
+            {/* Outer high-contrast dark composition wrapper */}
+            <div className="relative rounded-2xl bg-[#0B1120] border border-slate-800 shadow-[0_20px_60px_-15px_rgba(15,23,42,0.4)] p-4 sm:p-5 text-white overflow-hidden">
+              {/* Workspace Header Visual */}
+              <div className="flex items-center justify-between pb-3.5 mb-4 border-b border-slate-800">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs font-bold text-white tracking-wide">
+                        Acme Dynamics Workspace
+                      </span>
+                      <span className="text-[10px] px-1.5 py-0.5 rounded-md bg-blue-500/20 text-blue-400 font-mono">
+                        v2.4
+                      </span>
+                    </div>
+                    <p className="text-[10px] text-slate-400">
+                      5 AI Employees Active · Approval Gates Enforced
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-1.5">
+                  <span className="text-[10px] font-medium text-emerald-400 bg-emerald-950/60 border border-emerald-800/80 px-2 py-0.5 rounded-full flex items-center gap-1">
+                    <UserCheck className="w-3 h-3" />
+                    Reviewer Ready
+                  </span>
+                </div>
+              </div>
+
+              {/* 5 AI Employee Cards Row */}
+              <div className="mb-4">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
+                    Workforce Roster
+                  </span>
+                  <span className="text-[10px] text-blue-400 font-medium">Click to inspect</span>
+                </div>
+
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                  {HERO_AGENTS.map((agent) => {
+                    const Icon = agent.icon;
+                    const isSelected = selectedAgentHero === agent.id;
+                    return (
+                      <button
+                        key={agent.id}
+                        type="button"
+                        onClick={() => setSelectedAgentHero(agent.id)}
+                        className={`text-left p-2.5 rounded-xl border transition-all duration-200 ${
+                          isSelected
+                            ? 'bg-slate-800/90 border-blue-500 shadow-xs'
+                            : 'bg-slate-900/60 border-slate-800/80 hover:border-slate-700 hover:bg-slate-800/40'
+                        }`}
+                      >
+                        <div className="flex items-center justify-between mb-1.5">
+                          <div
+                            className="w-6 h-6 rounded-lg flex items-center justify-center text-white"
+                            style={{ backgroundColor: agent.accentBg }}
+                          >
+                            <Icon className="w-3.5 h-3.5" style={{ color: agent.accent }} />
+                          </div>
+                          <span
+                            className="text-[9px] font-semibold px-1.5 py-0.5 rounded-md"
+                            style={{
+                              backgroundColor: `${agent.accent}20`,
+                              color: agent.accent,
+                            }}
+                          >
+                            {agent.status}
+                          </span>
+                        </div>
+                        <p className="text-xs font-bold text-white truncate">{agent.name}</p>
+                        <p className="text-[10px] text-slate-400 truncate">{agent.role}</p>
+                      </button>
+                    );
+                  })}
+
+                  {/* Selected Agent Summary Strip */}
+                  <div className="col-span-2 sm:col-span-1 p-2.5 rounded-xl bg-blue-950/30 border border-blue-900/40 flex flex-col justify-between">
+                    <p className="text-[9px] uppercase tracking-wider text-blue-400 font-semibold">
+                      Current Task
+                    </p>
+                    <p className="text-[10px] text-slate-200 line-clamp-2 leading-tight mt-0.5">
+                      {HERO_AGENTS.find((a) => a.id === selectedAgentHero)?.task}
+                    </p>
+                    <div className="text-[9px] text-emerald-400 flex items-center gap-1 mt-1 font-medium">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
+                      Active Live
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Activity Feed: Task moving from Assigned to Completed */}
+              <div className="rounded-xl bg-slate-900/90 border border-slate-800 p-3 sm:p-3.5 space-y-2.5">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-1.5 text-xs font-semibold text-slate-300">
+                    <Clock className="w-3.5 h-3.5 text-blue-400" />
+                    <span>Live Task Pipeline</span>
+                  </div>
+                  <span className="text-[10px] text-slate-400 font-mono">
+                    Step {activeStage + 1} of 4
+                  </span>
+                </div>
+
+                {/* Progress Pipeline Bar */}
+                <div className="grid grid-cols-4 gap-1.5">
+                  {TASK_STAGES.map((s, index) => {
+                    const isDone = index < activeStage;
+                    const isCurrent = index === activeStage;
+                    return (
+                      <div
+                        key={s.stage}
+                        className={`h-1.5 rounded-full transition-all duration-500 ${
+                          isDone
+                            ? 'bg-emerald-500'
+                            : isCurrent
+                            ? 'bg-blue-500 shadow-xs shadow-blue-400'
+                            : 'bg-slate-800'
+                        }`}
+                      />
+                    );
+                  })}
+                </div>
+
+                {/* Active Task Card */}
+                <div className="p-2.5 rounded-lg bg-slate-950/80 border border-slate-800/80 flex items-start gap-2.5">
+                  <div
+                    className={`w-6 h-6 rounded-full flex items-center justify-center shrink-0 mt-0.5 ${
+                      activeStage === 3
+                        ? 'bg-emerald-500/20 text-emerald-400'
+                        : 'bg-blue-500/20 text-blue-400'
+                    }`}
+                  >
+                    {activeStage === 3 ? (
+                      <Check className="w-3.5 h-3.5" />
+                    ) : (
+                      <Play className="w-3 h-3 fill-current" />
+                    )}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-blue-400">
+                        {TASK_STAGES[activeStage].badge}
+                      </span>
+                      <span className="text-[9px] text-slate-400">
+                        {TASK_STAGES[activeStage].time}
+                      </span>
+                    </div>
+                    <p className="text-xs text-slate-200 font-medium truncate mt-0.5">
+                      {TASK_STAGES[activeStage].title}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Floating UI Badges */}
+              <div className="mt-3.5 pt-3 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-slate-400">
+                <span className="flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 inline-block" />
+                  Audit Trail: 100% Actions Logged
+                </span>
+                <button
+                  type="button"
+                  onClick={() => setIsDemoModalOpen(true)}
+                  className="text-blue-400 hover:text-blue-300 font-medium flex items-center gap-1"
+                >
+                  Schedule Live Walkthrough →
+                </button>
+              </div>
+            </div>
           </motion.div>
         </div>
       </div>
+
+      <DemoModal
+        isOpen={isDemoModalOpen}
+        onClose={() => setIsDemoModalOpen(false)}
+        defaultAgent="sales"
+      />
     </section>
   );
 }

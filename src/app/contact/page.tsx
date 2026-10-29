@@ -5,7 +5,7 @@ import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { SectionWrapper, GradientText, CursorGlow } from '@/components/ui';
 import { motion } from 'framer-motion';
-import { ExternalLink, Phone, Mail, MapPin, MessageSquare, Calendar, CheckCircle2, Loader2 } from 'lucide-react';
+import { ExternalLink, Phone, Mail, MapPin, MessageSquare, Calendar, CheckCircle2, Loader2, Users } from 'lucide-react';
 import { getGoogleFormUrl } from '@/lib/site-config';
 
 export default function ContactPage() {
@@ -26,7 +26,7 @@ export default function ContactPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           name: 'Website visitor',
-          email: 'ayushbhardwaj942006@gmail.com',
+          email: 'admin@inheriq.in',
           message: 'Contact page CTA clicked',
           source: 'contact-page',
         }),
@@ -86,9 +86,9 @@ export default function ContactPage() {
 
                 <div className="space-y-5">
                   {[
-                    { icon: Mail, label: 'Email', value: 'ayushbhardwaj942006@gmail.com', href: 'mailto:ayushbhardwaj942006@gmail.com' },
-                    { icon: Phone, label: 'Phone', value: '+91 6201328257', href: 'tel:+916201328257' },
-                    { icon: MapPin, label: 'Founder', value: 'Ayush Bhardwaj', href: '/' },
+                    { icon: Mail, label: 'Email', value: 'admin@inheriq.in', href: 'mailto:admin@inheriq.in' },
+                    { icon: Phone, label: 'Phone', value: '+91 6201328257 / +91 931688410', href: 'tel:+916201328257' },
+                    { icon: Users, label: 'Founders', value: 'Ayush Bhardwaj · Raghavendra Singh', href: '/' },
                   ].map((item) => {
                     const Icon = item.icon;
                     return (

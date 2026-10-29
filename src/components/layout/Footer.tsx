@@ -1,21 +1,21 @@
 'use client';
 
 import Link from 'next/link';
-import { Sparkles, Mail, ArrowUpRight } from 'lucide-react';
-import { SITE_CONFIG } from '@/lib/constants';
-import { getGoogleFormUrl } from '@/lib/site-config';
+import { Mail, Phone, Users, ArrowUpRight, ShieldCheck } from 'lucide-react';
 
-const footerLinks = {
+const FOOTER_SECTIONS = {
   Product: [
-    { label: 'AI Agents', href: '/agents' },
-    { label: 'Industries', href: '/industries' },
-    { label: 'Demo', href: '/demo' },
+    { label: 'AI Employees', href: '#ai-employees', isAnchor: true },
+    { label: 'Interactive Workflow', href: '#how-it-works', isAnchor: true },
+    { label: 'Workforce Console', href: '#product-preview', isAnchor: true },
+    { label: 'Solutions by Role', href: '#use-cases', isAnchor: true },
+    { label: 'Pricing Plans', href: '#pricing', isAnchor: true },
   ],
-  Company: [
-    { label: 'About', href: '/about' },
-    { label: 'Blog', href: '/blog' },
-    { label: 'Careers', href: '/careers' },
-    { label: 'Contact', href: '/contact' },
+  Platform: [
+    { label: 'Admin Portal', href: '/admin/login' },
+    { label: 'Book a Demo', href: '/demo' },
+    { label: 'Contact Us', href: '/contact' },
+    { label: 'About Inheriq', href: '/about' },
   ],
   Legal: [
     { label: 'Privacy Policy', href: '/privacy' },
@@ -24,69 +24,111 @@ const footerLinks = {
 };
 
 export function Footer() {
-  return (
-    <footer className="relative border-t border-border bg-bg-primary">
-      {/* Top gradient line */}
-      <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-accent/30 to-transparent" />
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (href.startsWith('#')) {
+      e.preventDefault();
+      const targetId = href.replace('#', '');
+      const element = document.getElementById(targetId);
+      if (element) {
+        const offset = 80;
+        const bodyRect = document.body.getBoundingClientRect().top;
+        const elementRect = element.getBoundingClientRect().top;
+        const elementPosition = elementRect - bodyRect;
+        const offsetPosition = elementPosition - offset;
 
-      <div className="container-custom py-16 lg:py-20">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-10 lg:gap-16">
-          {/* Brand */}
-          <div className="col-span-2 md:col-span-1">
-            <Link href="/" className="flex items-center gap-2.5 mb-5" aria-label="Inheriq home">
-              <img src="/inheriq-logo.svg" alt="Inheriq logo" className="h-9 w-9 rounded-xl object-cover" />
-              <span className="text-xl font-bold tracking-tight font-display text-white">
-                {SITE_CONFIG.name}
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth',
+        });
+      }
+    }
+  };
+
+  return (
+    <footer className="bg-white dark:bg-[#070B18] border-t border-slate-200 dark:border-slate-800 transition-colors duration-200">
+      <div className="container-custom py-16 sm:py-20">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-10 lg:gap-12">
+          {/* Brand Info */}
+          <div className="md:col-span-2 space-y-4">
+            <Link href="/" className="inline-flex items-center gap-2.5 group" aria-label="Inheriq Home">
+              <img
+                src="/inheriq-logo.svg"
+                alt="Inheriq logo"
+                className="h-9 w-9 rounded-xl object-contain border border-slate-200 dark:border-slate-800 shadow-xs"
+              />
+              <span className="text-xl font-bold font-display text-slate-900 dark:text-white tracking-tight">
+                Inheriq
               </span>
             </Link>
-            <p className="text-text-secondary text-sm leading-relaxed mb-6 max-w-xs">
-              {SITE_CONFIG.tagline} The world&apos;s most trusted AI workforce platform for small businesses.
+
+            <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed max-w-sm">
+              The AI Workforce Operating System for startups and SMBs. Deploy specialized AI teammates for sales, customer support, HR, and finance while keeping people in control.
             </p>
-            <div className="flex items-center gap-3">
-              <a
-                href={getGoogleFormUrl()}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-xl border border-border bg-white/[0.02] flex items-center justify-center text-text-secondary hover:text-accent hover:border-accent/30 transition-all duration-300"
-                aria-label="Get started with Inheriq"
-              >
-                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-              </a>
-              <a
-                href={getGoogleFormUrl()}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-xl border border-border bg-white/[0.02] flex items-center justify-center text-text-secondary hover:text-accent hover:border-accent/30 transition-all duration-300"
-                aria-label="Book a demo"
-              >
-                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-              </a>
-              <a
-                href="mailto:ayushbhardwaj942006@gmail.com"
-                className="w-10 h-10 rounded-xl border border-border bg-white/[0.02] flex items-center justify-center text-text-secondary hover:text-accent hover:border-accent/30 transition-all duration-300"
-                aria-label="Email"
-              >
-                <Mail className="w-4 h-4" />
-              </a>
+
+            <div className="pt-2 space-y-2.5">
+              <div className="flex items-center gap-2 text-xs text-slate-600 dark:text-slate-400">
+                <Mail className="w-4 h-4 text-blue-600 dark:text-blue-400 shrink-0" />
+                <a
+                  href="mailto:admin@inheriq.in"
+                  className="font-medium text-slate-800 dark:text-slate-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                >
+                  admin@inheriq.in
+                </a>
+              </div>
+
+              <div className="flex items-center gap-2 text-xs text-slate-600 dark:text-slate-400">
+                <Phone className="w-4 h-4 text-blue-600 dark:text-blue-400 shrink-0" />
+                <div className="flex flex-wrap items-center gap-x-2">
+                  <a href="tel:+916201328257" className="hover:text-blue-600 dark:hover:text-blue-400 font-medium text-slate-800 dark:text-slate-200 transition-colors">
+                    +91 6201328257
+                  </a>
+                  <span className="text-slate-300 dark:text-slate-600">/</span>
+                  <a href="tel:+91931688410" className="hover:text-blue-600 dark:hover:text-blue-400 font-medium text-slate-800 dark:text-slate-200 transition-colors">
+                    +91 931688410
+                  </a>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
+                <Users className="w-4 h-4 text-slate-400 dark:text-slate-500 shrink-0" />
+                <span>Founders: Ayush Bhardwaj · Raghavendra Singh</span>
+              </div>
+
+              <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400 pt-1">
+                <ShieldCheck className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
+                <span>Human-in-the-Loop Governance · DPDP Compliant</span>
+              </div>
             </div>
           </div>
 
-          {/* Links */}
-          {Object.entries(footerLinks).map(([category, links]) => (
-            <div key={category}>
-              <h4 className="text-sm font-semibold text-white mb-5 tracking-wide uppercase">
-                {category}
+          {/* Nav Categories */}
+          {Object.entries(FOOTER_SECTIONS).map(([title, links]) => (
+            <div key={title} className="space-y-3.5">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-white">
+                {title}
               </h4>
-              <ul className="space-y-3">
+              <ul className="space-y-2.5">
                 {links.map((link) => (
-                  <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      className="text-sm text-text-secondary hover:text-white transition-colors duration-300 flex items-center gap-1 group"
-                    >
-                      {link.label}
-                      <ArrowUpRight className="w-3 h-3 opacity-0 -translate-y-0.5 translate-x-0.5 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all duration-300" />
-                    </Link>
+                  <li key={link.label}>
+                    {link.href.startsWith('#') ? (
+                      <a
+                        href={link.href}
+                        onClick={(e) => handleNavClick(e, link.href)}
+                        className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                      >
+                        {link.label}
+                      </a>
+                    ) : (
+                      <Link
+                        href={link.href}
+                        className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors inline-flex items-center gap-1 group"
+                      >
+                        <span>{link.label}</span>
+                        {link.href.startsWith('http') && (
+                          <ArrowUpRight className="w-3 h-3 opacity-60 group-hover:opacity-100 transition-opacity" />
+                        )}
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -94,14 +136,12 @@ export function Footer() {
           ))}
         </div>
 
-        {/* Bottom */}
-        <div className="mt-16 pt-8 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-text-muted">
-            © {new Date().getFullYear()} {SITE_CONFIG.name}. All rights reserved. Made with ❤️ for Indian businesses.
-          </p>
-          <p className="text-xs text-text-muted flex items-center gap-1.5">
-            Built for 63M+ Indian MSMEs
-            <span className="inline-block w-1.5 h-1.5 rounded-full bg-success animate-pulse" />
+        {/* Bottom Bar */}
+        <div className="mt-14 pt-8 border-t border-slate-100 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 dark:text-slate-400">
+          <p>© {new Date().getFullYear()} Inheriq Technologies. All rights reserved.</p>
+          <p className="flex items-center gap-1.5">
+            <span>Built for modern startups & SMBs</span>
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block animate-pulse" />
           </p>
         </div>
       </div>

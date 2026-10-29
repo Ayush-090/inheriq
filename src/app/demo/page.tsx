@@ -27,7 +27,7 @@ export default function DemoPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           name: 'Demo request',
-          email: 'ayushbhardwaj942006@gmail.com',
+          email: 'admin@inheriq.in',
           message: 'Book demo CTA clicked',
           source: 'demo-page',
         }),
@@ -156,8 +156,8 @@ export default function DemoPage() {
 
                     <p className="text-xs text-text-muted">
                       Or email directly at{' '}
-                      <a href="mailto:ayushbhardwaj942006@gmail.com" className="text-accent hover:underline">
-                        ayushbhardwaj942006@gmail.com
+                      <a href="mailto:admin@inheriq.in" className="text-accent hover:underline">
+                        admin@inheriq.in
                       </a>
                     </p>
                   </div>

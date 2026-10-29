@@ -4,6 +4,12 @@ export const SITE_CONFIG = {
   description:
     'Build and scale your small business with AI employees — smart 24/7 digital workers designed to answer calls, handle WhatsApp, book meetings, run marketing, track payments, and manage HR.',
   url: process.env.NEXT_PUBLIC_SITE_URL || process.env.SITE_URL || 'https://inheriq.in',
+  email: 'admin@inheriq.in',
+  contacts: [
+    { name: 'Ayush Bhardwaj', phone: '+91 6201328257' },
+    { name: 'Raghavendra Singh', phone: '+91 931688410' },
+  ],
+  phones: ['+91 6201328257', '+91 931688410'],
   googleFormUrl:
     process.env.NEXT_PUBLIC_GOOGLE_FORM_URL ||
     process.env.GOOGLE_FORM_URL ||

@@ -74,8 +74,8 @@ export default function PrivacyPage() {
               <h2 className="text-xl font-bold mb-3">7. Contact Us</h2>
               <p className="text-text-secondary leading-relaxed">
                 If you have questions about this Privacy Policy, please contact us at{' '}
-                <a href="mailto:ayushbhardwaj942006@gmail.com" className="text-accent hover:underline">
-                  ayushbhardwaj942006@gmail.com
+                <a href="mailto:admin@inheriq.in" className="text-accent hover:underline">
+                  admin@inheriq.in
                 </a>.
               </p>
             </section>
